@@ -20,7 +20,7 @@ class _MyHomePageState extends State<HomePage> {
           style: Theme.of(context).textTheme.headlineLarge,
         ),
       ),
-      floatingActionButton: const BottomNav(),
+     
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
