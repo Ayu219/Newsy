@@ -29,7 +29,7 @@ class BottomNav extends StatelessWidget {
                 },
                 child: Obx(
                   () => AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     curve: Curves.bounceInOut,
                     width: 40,
                     height: 40,
@@ -56,7 +56,7 @@ class BottomNav extends StatelessWidget {
                 },
                 child: Obx(
                   () => AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     curve: Curves.bounceInOut,
                     width: 40,
                     height: 40,
@@ -83,7 +83,7 @@ class BottomNav extends StatelessWidget {
                 },
                 child: Obx(
                   () => AnimatedContainer(
-                    duration: Duration(milliseconds: 100),
+                    duration: const Duration(milliseconds: 100),
                     curve: Curves.easeIn,
                     width: 40,
                     height: 40,

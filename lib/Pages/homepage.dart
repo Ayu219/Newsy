@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:news_app/Controller/news_controller.dart';
 import 'package:news_app/Pages/HomePage/tile_news.dart';
 import 'package:news_app/Pages/HomePage/trending_card.dart';
+import 'package:news_app/Pages/NewsDetail/news_details.dart';
 import 'package:news_app/Widgets/bottom_navbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,14 +16,8 @@ class HomePage extends StatefulWidget {
 class _MyHomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    NewsController newsController = Get.put(NewsController());
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "NEWSY",
-          style: Theme.of(context).textTheme.headlineLarge,
-        ),
-      ),
-     
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -28,6 +25,48 @@ class _MyHomePageState extends State<HomePage> {
             scrollDirection: Axis.vertical,
             child: Column(
               children: [
+                // SizedBox(height: 40,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: const Icon(Icons.dashboard),
+                    ),
+                    const Text(
+                      "NEWSY",
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1.5,
+                        fontFamily: "Poppins",
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        newsController.getTrendingNews();
+                        newsController.getNewsForYou();
+                      },
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primaryContainer,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: Icon(Icons.person),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -44,20 +83,23 @@ class _MyHomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 20,
                 ),
-                const SingleChildScrollView(
+                SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      TrendingCard(
-                        imageUrl:
-                            "https://www.hindustantimes.com/ht-img/img/2024/06/21/400x225/Narendra_Modi_1718983105228_1718983105530.jpg",
-                        author: "Ayush Tomer",
-                        tag: "Trending",
-                        time: "2 Days Ago",
-                        title:
-                            "International Yoga Day Live Updates: Yoga has become a unifying force, says PM Modi",
-                      ),
-                    ],
+                  child: Obx(
+                    () => Row(
+                      children: newsController.trendingNewsList
+                          .map((e) => TrendingCard(
+                              onTap: () {
+                                Get.to(() => NewsDetailsPage(news: e));
+                              },
+                              imageUrl: e.urlToImage ??
+                                  "https://images.indianexpress.com/2024/07/PTI07_01_2024_000315B.jpg",
+                              title: e.title ?? "Unknown",
+                              author: e.author ?? "Unknown",
+                              tag: "Ayusj",
+                              time: e.publishedAt ?? "Ayush"))
+                          .toList(),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -82,17 +124,21 @@ class _MyHomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 20,
                 ),
-                const Column(
-                  children: [
-                    NewsTile(
-                      imageUrl:
-                          "https://www.hindustantimes.com/ht-img/img/2024/06/21/400x225/Narendra_Modi_1718983105228_1718983105530.jpg",
-                      author: "Ayush Tomer",
-                      time: "2 Days Ago",
-                      title:
-                          "International Yoga Day Live Updates: Yoga has become a unifying force, says PM Modi",
-                    )
-                  ],
+                Obx(
+                  () => Column(
+                    children: newsController.newsForYouList
+                        .map((e) => NewsTile(
+                              onTap: () {
+                                Get.to(NewsDetailsPage(news: e));
+                              },
+                              imageUrl: e.urlToImage ??
+                                  "https://www.hindustantimes.com/ht-img/img/2024/06/21/400x225/Narendra_Modi_1718983105228_1718983105530.jpg",
+                              author: e.author ?? "Unknown",
+                              time: e.publishedAt ?? "Unknown",
+                              title: e.title ?? "No Title",
+                            ))
+                        .toList(),
+                  ),
                 ),
               ],
             ),
@@ -102,4 +148,3 @@ class _MyHomePageState extends State<HomePage> {
     );
   }
 }
-
