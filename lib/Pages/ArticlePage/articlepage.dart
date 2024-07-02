@@ -22,20 +22,24 @@ class Articlepage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              ...newsController.newsForYouList
-                  .map(
-                    (e) => NewsTile(
-                      onTap: () {
-                        Get.to(NewsDetailsPage(news: e));
-                      },
-                      imageUrl:e.urlToImage! ,
-                      author: e.author!,
-                      time: e.publishedAt!,
-                      title:
-                          e.title!,
-                    ),
-                  )
-                  
+              Obx(
+                () => Column(
+                  children: newsController.newsForYouList
+                      .map(
+                        (e) => NewsTile(
+                          onTap: () {
+                            Get.to(NewsDetailsPage(news: e));
+                          },
+                          imageUrl:  e.urlToImage ??
+                                        "https://www.hindustantimes.com/ht-img/img/2024/06/21/400x225/Narendra_Modi_1718983105228_1718983105530.jpg" ,
+                          author: e.author ?? "Unknown ",
+                          time: e.publishedAt ?? "Unknown",
+                          title: e.title ?? "Unknown",
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
             ],
           ),
         ),

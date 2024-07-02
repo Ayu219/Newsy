@@ -9,7 +9,8 @@ class TrendingCard extends StatelessWidget {
     required this.title,
     required this.author,
     required this.tag,
-    required this.time, required this.onTap,
+    required this.time,
+    required this.onTap,
   });
   final String imageUrl;
   final String title;
@@ -41,10 +42,22 @@ class TrendingCard extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  imageUrl,
-                  fit: BoxFit.cover,
-                ),
+                child: imageUrl != null
+                    ? Image.network(
+                        imageUrl,
+                        errorBuilder: (BuildContext context, Object exception,
+                            StackTrace? stackTrace) {
+                          // Appropriate logging or analytics, e.g.
+                          // myAnalytics.recordError(
+                          //   'An error occurred loading "https://example.does.not.exist/image.jpg"',
+                          //   exception,
+                          //   stackTrace,
+                          // );
+                          return const Text('ð¢');
+                        },
+                        fit: BoxFit.cover,
+                      )
+                    : Placeholder(),
               ),
             ),
             const SizedBox(
@@ -86,7 +99,7 @@ class TrendingCard extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                Text(author),
+                Flexible(child: Text(author)),
               ],
             )
           ],

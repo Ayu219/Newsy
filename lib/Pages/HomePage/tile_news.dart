@@ -39,6 +39,16 @@ class NewsTile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
                   imageUrl,
+                  errorBuilder: (BuildContext context, Object exception,
+                      StackTrace? stackTrace) {
+                    // Appropriate logging or analytics, e.g.
+                    // myAnalytics.recordError(
+                    //   'An error occurred loading "https://example.does.not.exist/image.jpg"',
+                    //   exception,
+                    //   stackTrace,
+                    // );
+                    return const Text('ð¢');
+                  },
                   fit: BoxFit.cover,
                 ),
               ),

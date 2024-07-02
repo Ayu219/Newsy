@@ -58,7 +58,7 @@ class NewsDetailsPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                 Text( news.title!,
+                 Text( news.title ?? "Title",
                   style: const TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
@@ -85,7 +85,7 @@ class NewsDetailsPage extends StatelessWidget {
                       width: 10,
                     ),
                     Text(
-                      news.publishedAt !,
+                      news.publishedAt ??"Unknown",
                       style: TextStyle(
                           fontSize: 18,
                           color:
