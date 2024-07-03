@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/Config/loadingContainer.dart';
+import 'package:newsy/Config/loadingContainer.dart';
 
 class TrendingcardShimmer extends StatelessWidget {
   const TrendingcardShimmer({super.key});

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:news_app/Model/news_model.dart';
+import 'package:newsy/Model/news_model.dart';
 
 class NewsController extends GetxController {
   RxList<NewsModel> trendingNewsList = <NewsModel>[].obs;
@@ -20,6 +20,7 @@ class NewsController extends GetxController {
   RxBool isAppleNewsLoading = false.obs;
   RxBool isCryptoNewsLoading = false.obs;
   RxBool isWSJNewsLoading = false.obs;
+  RxBool isSpeaking = false.obs;
 
   FlutterTts flutterTts = FlutterTts();
 
@@ -172,7 +173,7 @@ class NewsController extends GetxController {
     isNewsForYouLoading.value = true;
     try {
       var baseURL =
-          "https://newsapi.org/v2/everything?q=${query}&sortBy=publishedAt&apiKey=e19b38ac5aaf490f916b8d040367d3c0";
+          "https://newsapi.org/v2/everything?q=$query&sortBy=publishedAt&apiKey=e19b38ac5aaf490f916b8d040367d3c0";
       var response = await http.get(Uri.parse(baseURL));
       if (response.statusCode == 200) {
         final Map<String, dynamic> body = jsonDecode(response.body);
@@ -199,10 +200,14 @@ class NewsController extends GetxController {
   }
 
   Future<void> speak(String text) async {
+    isSpeaking.value = true;
     await flutterTts.setLanguage("en-US");
     await flutterTts.setSpeechRate(0.4);
     await flutterTts.setVolume(1.0);
     await flutterTts.setPitch(0.8);
     await flutterTts.speak(text);
+    flutterTts.setCompletionHandler(() {
+      isSpeaking.value = false;
+    });
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_app/Controller/bottom_navbar.dart';
-import 'package:news_app/Widgets/bottom_navbar.dart';
+import 'package:newsy/Controller/bottom_navbar.dart';
+import 'package:newsy/Widgets/bottom_navbar.dart';
 
 class HomepageController extends StatelessWidget {
   const HomepageController({super.key});

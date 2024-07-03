@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:news_app/Controller/news_controller.dart';
-import 'package:news_app/Model/news_model.dart';
-import 'package:news_app/Pages/HomePage/tile_news.dart';
+import 'package:newsy/Controller/news_controller.dart';
+import 'package:newsy/Model/news_model.dart';
 
 class NewsDetailsPage extends StatelessWidget {
   final NewsModel news;
@@ -48,7 +47,8 @@ class NewsDetailsPage extends StatelessWidget {
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.network(
-                              news.urlToImage!,
+                              news.urlToImage ??
+                                  "https://images.indianexpress.com/2024/07/PTI07_01_2024_000315B.jpg",
                               fit: BoxFit.cover,
                             )),
                       ),
@@ -94,7 +94,7 @@ class NewsDetailsPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
@@ -104,21 +104,36 @@ class NewsDetailsPage extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      IconButton(
-                        onPressed: () {
-                          newsController
-                              .speak(news.description ?? "No Description");
-                        },
-                        icon: Icon(
-                          Icons.play_arrow_rounded,
-                          size: 50,
-                        ),
+                      Obx(
+                        () => newsController.isSpeaking.value
+                            ? IconButton(
+                                onPressed: () {
+                                  newsController.flutterTts.stop();
+                                  newsController.isSpeaking.value = false;
+                                },
+                                icon: const Icon(
+                                  Icons.stop_rounded,
+                                  size: 50,
+                                ),
+                              )
+                            : IconButton(
+                                onPressed: () {
+                                  newsController
+                                      .speak(news.content ?? "No Description");
+                                },
+                                icon: const Icon(
+                                  Icons.play_arrow_rounded,
+                                  size: 50,
+                                ),
+                              ),
                       ),
-                      Expanded(
-                        child: Lottie.asset(
-                          'assets/animations/wave.json',
-                          height: 70,
-                          animate: true,
+                      Obx(
+                        () => Expanded(
+                          child: Lottie.asset(
+                            'assets/animations/wave.json',
+                            height: 70,
+                            animate: newsController.isSpeaking.value,
+                          ),
                         ),
                       ),
                     ],

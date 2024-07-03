@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_app/Controller/news_controller.dart';
+import 'package:newsy/Controller/news_controller.dart';
 
 class MySearchBar extends StatelessWidget {
   const MySearchBar({

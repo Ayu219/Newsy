@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_app/Controller/news_controller.dart';
-import 'package:news_app/Pages/HomePage/tile_news.dart';
-import 'package:news_app/Pages/HomePage/trending_card.dart';
-import 'package:news_app/Pages/NewsDetail/news_details.dart';
-import 'package:news_app/Widgets/tile_news_shimmer.dart';
-import 'package:news_app/Widgets/trendingCardShimmer.dart';
+import 'package:newsy/Controller/news_controller.dart';
+import 'package:newsy/Pages/HomePage/tile_news.dart';
+import 'package:newsy/Pages/HomePage/trending_card.dart';
+import 'package:newsy/Pages/NewsDetail/news_details.dart';
+import 'package:newsy/Widgets/tile_news_shimmer.dart';
+import 'package:newsy/Widgets/trendingCardShimmer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,8 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomePage> {
-
- 
   @override
   Widget build(BuildContext context) {
     NewsController newsController = Get.put(NewsController());
@@ -90,12 +88,12 @@ class _MyHomePageState extends State<HomePage> {
                   scrollDirection: Axis.horizontal,
                   child: Obx(
                     () => newsController.isTrendingLoading.value
-                        ?  Row(
-                          children: [
-                            for(int i=0;i<5;i++)
-                            const TrendingcardShimmer(),
-                          ],
-                        )
+                        ? Row(
+                            children: [
+                              for (int i = 0; i < 5; i++)
+                                const TrendingcardShimmer(),
+                            ],
+                          )
                         : Row(
                             children: newsController.trendingNewsList
                                 .map(
@@ -140,11 +138,10 @@ class _MyHomePageState extends State<HomePage> {
                 Obx(
                   () => newsController.isNewsForYouLoading.value
                       ? Column(
-                        children: [
-                          for(int i=0;i<5;i++)
-                          const TileNewsShimmer()
-                        ],
-                      )
+                          children: [
+                            for (int i = 0; i < 5; i++) const TileNewsShimmer()
+                          ],
+                        )
                       : Column(
                           children: newsController.newsForYou5
                               .map((e) => NewsTile(
@@ -183,11 +180,10 @@ class _MyHomePageState extends State<HomePage> {
                 Obx(
                   () => newsController.isAppleNewsLoading.value
                       ? Column(
-                        children: [
-                          for(int i=0;i<5;i++)
-                          const TileNewsShimmer()
-                        ],
-                      )
+                          children: [
+                            for (int i = 0; i < 5; i++) const TileNewsShimmer()
+                          ],
+                        )
                       : Column(
                           children: newsController.appleNews5
                               .map((e) => NewsTile(
@@ -224,11 +220,11 @@ class _MyHomePageState extends State<HomePage> {
                   child: Obx(
                     () => newsController.isWSJNewsLoading.value
                         ? Row(
-                          children: [
-                            for(int i=0;i<5;i++)
-                            const TrendingcardShimmer(),
-                          ],
-                        )
+                            children: [
+                              for (int i = 0; i < 5; i++)
+                                const TrendingcardShimmer(),
+                            ],
+                          )
                         : Row(
                             children: newsController.wsjNews5
                                 .map(
@@ -271,11 +267,10 @@ class _MyHomePageState extends State<HomePage> {
                 Obx(
                   () => newsController.isCryptoNewsLoading.value
                       ? Column(
-                        children: [
-                          for(int i=0;i<5;i++)
-                          const TileNewsShimmer()
-                        ],
-                      )
+                          children: [
+                            for (int i = 0; i < 5; i++) const TileNewsShimmer()
+                          ],
+                        )
                       : Column(
                           children: newsController.cryptoNews5
                               .map((e) => NewsTile(

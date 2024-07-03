@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_app/Controller/bottom_navbar.dart';
+import 'package:newsy/Controller/bottom_navbar.dart';
 
 class BottomNav extends StatelessWidget {
   const BottomNav({

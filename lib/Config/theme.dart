@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/Config/colors.dart';
+import 'package:newsy/Config/colors.dart';
 
 var lightTheme = ThemeData(
     useMaterial3: true,

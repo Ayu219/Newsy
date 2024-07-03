@@ -1,4 +1,4 @@
-# news_app
+# newsy
 
 A new Flutter project.
 

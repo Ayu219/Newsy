@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_app/Pages/NewsDetail/news_details.dart';
+import 'package:newsy/Pages/NewsDetail/news_details.dart';
 
 class TrendingCard extends StatelessWidget {
   const TrendingCard({
