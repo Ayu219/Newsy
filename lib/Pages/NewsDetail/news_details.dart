@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+import 'package:news_app/Controller/news_controller.dart';
 import 'package:news_app/Model/news_model.dart';
 import 'package:news_app/Pages/HomePage/tile_news.dart';
 
 class NewsDetailsPage extends StatelessWidget {
   final NewsModel news;
-  const NewsDetailsPage({
-    super.key,required this.news
-  });
+  const NewsDetailsPage({super.key, required this.news});
 
   @override
   Widget build(BuildContext context) {
+    NewsController newsController = Get.put(NewsController());
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -45,12 +46,11 @@ class NewsDetailsPage extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child:  Image.network(
-                            news.urlToImage!,
-                            fit: BoxFit.cover,
-                          )
-                        ),
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              news.urlToImage!,
+                              fit: BoxFit.cover,
+                            )),
                       ),
                     ],
                   ),
@@ -58,7 +58,8 @@ class NewsDetailsPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                 Text( news.title ?? "Title",
+                Text(
+                  news.title ?? "Title",
                   style: const TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
@@ -67,7 +68,7 @@ class NewsDetailsPage extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      news.publishedAt !,
+                      news.publishedAt!,
                       style: Theme.of(context).textTheme.labelSmall,
                     )
                   ],
@@ -85,7 +86,7 @@ class NewsDetailsPage extends StatelessWidget {
                       width: 10,
                     ),
                     Text(
-                      news.publishedAt ??"Unknown",
+                      news.publishedAt ?? "Unknown",
                       style: TextStyle(
                           fontSize: 18,
                           color:
@@ -93,14 +94,44 @@ class NewsDetailsPage extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          newsController
+                              .speak(news.description ?? "No Description");
+                        },
+                        icon: Icon(
+                          Icons.play_arrow_rounded,
+                          size: 50,
+                        ),
+                      ),
+                      Expanded(
+                        child: Lottie.asset(
+                          'assets/animations/wave.json',
+                          height: 70,
+                          animate: true,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
                 Row(
                   children: [
                     Flexible(
-                      child: Text(news.description ?? "No Description"
-                        ,
+                      child: Text(
+                        news.description ?? "No Description",
                         style: TextStyle(
                             fontSize: 18,
                             color: Theme.of(context)
