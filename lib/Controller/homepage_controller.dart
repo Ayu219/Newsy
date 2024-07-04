@@ -10,6 +10,8 @@ class HomepageController extends StatelessWidget {
   Widget build(BuildContext context) {
     BottomNavController controller = Get.put(BottomNavController());
     return Scaffold(
+      
+     extendBody: true,
       floatingActionButton: const BottomNav(),
       body: Obx(() => controller.pages[controller.index.value]),
     );

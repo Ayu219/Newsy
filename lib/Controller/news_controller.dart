@@ -42,6 +42,7 @@ class NewsController extends GetxController {
       var response = await http.get(Uri.parse(baseURL));
       if (response.statusCode == 200) {
         final Map<String, dynamic> body = jsonDecode(response.body);
+        
         for (var articles in body["articles"]) {
           trendingNewsList.add(NewsModel(
             author: articles["author"],
@@ -202,7 +203,7 @@ class NewsController extends GetxController {
   Future<void> speak(String text) async {
     isSpeaking.value = true;
     await flutterTts.setLanguage("en-US");
-    await flutterTts.setSpeechRate(0.4);
+    await flutterTts.setSpeechRate(0.5);
     await flutterTts.setVolume(1.0);
     await flutterTts.setPitch(0.8);
     await flutterTts.speak(text);

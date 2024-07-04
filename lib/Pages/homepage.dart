@@ -4,6 +4,7 @@ import 'package:newsy/Controller/news_controller.dart';
 import 'package:newsy/Pages/HomePage/tile_news.dart';
 import 'package:newsy/Pages/HomePage/trending_card.dart';
 import 'package:newsy/Pages/NewsDetail/news_details.dart';
+import 'package:newsy/Pages/Profile/profilepage.dart';
 import 'package:newsy/Widgets/tile_news_shimmer.dart';
 import 'package:newsy/Widgets/trendingCardShimmer.dart';
 
@@ -53,14 +54,20 @@ class _MyHomePageState extends State<HomePage> {
                         newsController.getTrendingNews();
                         newsController.getNewsForYou();
                       },
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primaryContainer,
-                          borderRadius: BorderRadius.circular(100),
+                      child: InkWell(
+                        onTap: () {
+                          Get.to(() => Profilepage());
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color:
+                                Theme.of(context).colorScheme.primaryContainer,
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: Icon(Icons.person),
                         ),
-                        child: Icon(Icons.person),
                       ),
                     )
                   ],

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:newsy/Pages/NewsDetail/news_details.dart';
 
 class TrendingCard extends StatelessWidget {
   const TrendingCard({
@@ -42,22 +40,20 @@ class TrendingCard extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: imageUrl != null
-                    ? Image.network(
-                        imageUrl,
-                        errorBuilder: (BuildContext context, Object exception,
-                            StackTrace? stackTrace) {
-                          // Appropriate logging or analytics, e.g.
-                          // myAnalytics.recordError(
-                          //   'An error occurred loading "https://example.does.not.exist/image.jpg"',
-                          //   exception,
-                          //   stackTrace,
-                          // );
-                          return const Text('ð¢');
-                        },
-                        fit: BoxFit.cover,
-                      )
-                    : Placeholder(),
+                child: Image.network(
+                  imageUrl,
+                  errorBuilder: (BuildContext context, Object exception,
+                      StackTrace? stackTrace) {
+                    // Appropriate logging or analytics, e.g.
+                    // myAnalytics.recordError(
+                    //   'An error occurred loading "https://example.does.not.exist/image.jpg"',
+                    //   exception,
+                    //   stackTrace,
+                    // );
+                    return const Placeholder();
+                  },
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(

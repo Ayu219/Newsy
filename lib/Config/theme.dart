@@ -94,7 +94,7 @@ var darkTheme = ThemeData(
       brightness: Brightness.dark,
       background: darkBgColor,
       onBackground: darkFontColor,
-      primaryContainer: darkDivColor,
+     primaryContainer: darkDivColor,
       onPrimaryContainer: darkFontColor,
       secondaryContainer: darkLableColor,
       primary: darkPrimaryColor,

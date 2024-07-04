@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newsy/Pages/ArticlePage/articlepage.dart';
-import 'package:newsy/Pages/Profile/profilepage.dart';
 import 'package:newsy/Pages/homepage.dart';
 
 class BottomNavController extends GetxController {
@@ -10,6 +9,6 @@ class BottomNavController extends GetxController {
   List<Widget> pages = [
     const HomePage(),
     const Articlepage(),
-    const Profilepage(),
+    // const Profilepage(),
   ];
 }
