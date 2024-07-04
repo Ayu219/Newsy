@@ -33,6 +33,7 @@ The use of GetX ensures efficient state management, offering smooth navigation a
 
 **Server:**  [News API](https://newsapi.org/ "Optional link title")
 
+[![Download](https://i.ibb.co/JyF9v3b/68747470733a2f2f626c6f676765722e676f6f676c6575736572636f6e74656e742e636f6d2f696d672f622f523239765a32.png)](https://github.com/Ayu219/Newsy/releases/download/v1.0.0/Newsy.apk)
 
 
 ## Screenshots
